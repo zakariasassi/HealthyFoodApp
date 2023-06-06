@@ -1,83 +1,185 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import React, { useState, useEffect, createContext, useContext } from "react";
+
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemText from "@mui/material/ListItemText";
+import { Box, Divider } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
-  };
-
-  const list = (anchor) => (
-    <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-      dir='rtl'
-    >
-<List>
-    <span style={{fontSize:20 , margin:20}} >الادارة </span>
-    {['ادارة المستخدمين', 'مدراء النظام', 'اضافة مديو نظام', 'اضافة مستخدم'].map((text, index) => (
-    <ListItem key={text} disablePadding>
-      <ListItemButton>
-        <ListItemIcon>
-          <MailIcon />
-        </ListItemIcon>
-        <ListItemText primary={text} style={{ textAlign: 'right' }} />
-      </ListItemButton>
-    </ListItem>
-  ))}
-</List>
-
-      <Divider />
-      <List>
-    <span style={{fontSize:20 , margin:20}} >الادارة </span>
-    {['التصنيفات', 'اضافة تصنيف', 'اضافة اكلة', 'اضافة معلومات عامة'].map((text, index) => (
-    <ListItem key={text} disablePadding>
-      <ListItemButton>
-        <ListItemIcon>
-          <MailIcon />
-        </ListItemIcon>
-        <ListItemText primary={text} style={{ textAlign: 'right' }} />
-      </ListItemButton>
-    </ListItem>
-  ))}
-</List>
-    </Box>
-  );
-
   return (
-    <div>
-          <Drawer
-            
-            anchor={'right'}
-            open={state}
-            hideBackdrop={true}
-            onClose={toggleDrawer('right: ', false)}
-            variant="permanent"
+    <>
+      <Box
+        sx={{
+          backgroundColor: "white",
+          height: "100vh",
+          width: "15%",
+          display: "flex",
+          flexDirection: "column",
+          fontFamily: 'tajawal'
+        }}
+      >
+        <MenuList
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "auto",
+          }}
+          dir="rtl"
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginBottom: 40,
+            }}
+          >
+            <img
+              className="w-50"
+              src={
+                "https://img.freepik.com/premium-vector/chef-food-restaurant-logo_7085-179.jpg"
+              }
+            />
+          </div>
+
+          <MenuItem>
+            <Link
+              to={"/mangeusers"}
+              style={{
+                textDecoration: "none",
+              }}
             >
-            {list('right')}
-          </Drawer>
-    </div>
+              <ListItemText
+                sx={{
+                  color: "#02023E",
+                  fontFamily: "tajawal",
+                  padding: "10px",
+                }}
+              >
+                ادارة المستخدمين
+              </ListItemText>
+            </Link>
+          </MenuItem>
+
+          <MenuItem>
+            <Link
+              to={"/admins"}
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <ListItemText
+                sx={{
+                  color: "#02023E",
+                  fontFamily: "tajawal",
+                  padding: "10px",
+                }}
+              >
+                مدراء النظام 
+              </ListItemText>
+            </Link>
+          </MenuItem>
+
+          <MenuItem>
+            <Link
+              to={"/addadmin"}
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <ListItemText
+                sx={{
+                  color: "#02023E",
+                  fontFamily: "tajawal",
+                  padding: "10px",
+                }}
+              >
+                 اضافة مدير نظام    
+              </ListItemText>
+            </Link>
+          </MenuItem>
+          <Divider sx={{ backgroundColor: "#02023E" }} />
+
+          <MenuItem>
+            <Link
+              to={"/categorys"}
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <ListItemText
+                sx={{
+                  color: "#02023E",
+                  fontFamily: "tajawal",
+                  padding: "10px",
+                }}
+              >
+                 التصنيفات
+              </ListItemText>
+            </Link>
+          </MenuItem>
+
+          <MenuItem>
+            <Link
+              to={"/addcategory"}
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <ListItemText
+                sx={{
+                  color: "#02023E",
+                  fontFamily: "tajawal",
+                  padding: "10px",
+                }}
+              >
+                 اضافة تصنيف  
+              </ListItemText>
+            </Link>
+          </MenuItem>
+          <Divider sx={{ backgroundColor: "#02023E" }} />
+
+          <MenuItem>
+            <Link
+              to={"/addmeal"}
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <ListItemText
+                style={{
+                  fontFamily: "tajawal",
+                  color: "#02023E",
+                  padding: "10px",
+                }}
+              >
+                اضافة اكلة 
+              </ListItemText>
+            </Link>
+          </MenuItem>
+
+          <MenuItem>
+            <Link
+              to={"/addinfo"}
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <ListItemText
+                sx={{
+                  color: "#02023E",
+                  fontFamily: "tajawal",
+                  padding: "10px",
+                }}
+              >
+اضافة معلومة صحية
+              </ListItemText>
+            </Link>
+          </MenuItem>
+ 
+        </MenuList>
+      </Box>
+    </>
   );
 }
