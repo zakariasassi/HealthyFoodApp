@@ -1,19 +1,17 @@
 const express = require('express')
 const cors = require('cors')
-const bodybarser = require('body-parser')
 const router = require('./routes/router')
 
 
-
-
 const app = express()
-const port = 3000
+const port = 3001
 
 
 
 app.use(cors())
 
-app.use(express.urlencoded( { extends : true }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(router)
 app.get('/', (req, res) => res.send('Hello World!'))
