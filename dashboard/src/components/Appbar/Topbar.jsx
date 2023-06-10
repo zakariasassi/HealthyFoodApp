@@ -11,8 +11,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import {useNavigate}  from 'react-router-dom'
+
+
+
 
 export default function Topbar() {
+
+
+  const navigate = useNavigate()
+
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -24,14 +32,20 @@ export default function Topbar() {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.preventDefault()
+
     setAnchorEl(null);
   };
 
+
+  const handelLogout = (event) => { 
+    navigate('/login')
+  }
   return (
     <>
 
-      <AppBar sx={{ backgroundColor:'#ABE188'}} >
+      <AppBar sx={{ backgroundColor:'#017330'}} >
         <Toolbar>
 
  
@@ -62,8 +76,7 @@ export default function Topbar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={() => {  handelLogout()}}>خروج</MenuItem>
               </Menu>
             </div>
           )}

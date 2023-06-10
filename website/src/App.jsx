@@ -8,6 +8,8 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Categorys from "./pages/Categorys/Categorys";
+import Meals from "./pages/Meals/Meals";
+import Info from './pages/Info/Info'
 
 function App() {
   return (
@@ -20,8 +22,8 @@ function App() {
         <Route path="/login" element={<Layout page={<Login />} />} />
         <Route path="/signup" element={<Layout page={<Signup />} />} />
         <Route path="/cat" element={<Layout page={<Categorys />} />} />
-        <Route path="/meals" element={<Layout page={<Home />} />} />
-        <Route path="/" element={<Layout page={<Home />} />} />
+        <Route path="/meals" element={<Layout page={<Meals />} />} />
+        <Route path="/info" element={<Layout page={<Info />} />} />
 
        </Routes>
       </BrowserRouter>
