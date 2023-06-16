@@ -11,8 +11,10 @@ exports.createCategory = async function (req , res) {
   try {
     const category = await Category.create({ name });
     console.log('Category created:', category);
-    return category;
+    res.status(200)
+
   } catch (error) {
+    res.status(500)
     console.error('Error creating category:', error);
     throw error;
   }
@@ -22,7 +24,7 @@ exports.createCategory = async function (req , res) {
 exports.getAllCategories = async function (req , res) {
   try {
     const categories = await Category.findAll();
-     res.status(200).json(categories)
+     res.status(200).json({Categorys:categories})
   } catch (error) {
     console.error('Error retrieving categories:', error);
     throw error;
@@ -67,15 +69,21 @@ exports.updateCategory = async function (req , res) {
 
 // Delete a category
 exports.deleteCategory = async function (req , res) {
+    console.log(req.params.id)
   try {
-    const category = await Category.findByPk(id);
+    const category = await Category.findByPk(req.params.id);
     if (category) {
       await category.destroy();
       console.log('Category deleted');
+      res.status(200)
     } else {
+        res.status(200)
+
       console.log('Category not found');
     }
   } catch (error) {
+    res.status(500)
+
     console.error('Error deleting category:', error);
     throw error;
   }
