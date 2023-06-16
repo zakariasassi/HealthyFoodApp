@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
+import Avatar from 'react-avatar';
 
 function TopBar() {
 
     const [open , setOpen] = useState(false)
   return (
     <>
-     <nav className="bg-green-50" dir='rtl'>
+     <nav className="bg-green-400" dir='rtl'>
   <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div className="relative flex h-16 items-center justify-between">
       <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -25,16 +26,16 @@ function TopBar() {
       <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div className="flex flex-shrink-0 items-center">
           {/* <img className="hidden h-8 w-auto lg:block" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" /> */}
-          LOGO HERE
+         <span className='text-white text-5xl  font-bold'> H F</span>
         </div>
         <div className="hidden sm:mr-6 sm:block">
           <div className="flex space-x-4 mr-5">
       
             <a href="#" className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium mr-5" aria-current="page">لوحة التحكم</a>
             <div className='flex space-x-4 mr-5'>
-            <a href="#" className="text-gray-300 hover:bg-green-700 hover:text-white rounded-md px-3 mr-5 py-2 text-sm font-medium">الاكلات</a>
-            <a href="#" className="text-gray-300 hover:bg-green-700 hover:text-white rounded-md px-3 py-2 mr-5  text-sm font-medium">التصنيفات</a>
-            <a href="#" className="text-gray-300 hover:bg-green-700 hover:text-white rounded-md px-3 py-2 mr-5 text-sm font-medium">معلومات عامة</a>
+            <a href="#" className="text-white hover:bg-green-700 hover:text-white rounded-md px-3 mr-5 py-2 text-sm font-medium">الاكلات</a>
+            <a href="#" className="text-white hover:bg-green-700 hover:text-white rounded-md px-3 py-2 mr-5  text-sm font-medium">التصنيفات</a>
+            <a href="#" className="text-white hover:bg-green-700 hover:text-white rounded-md px-3 py-2 mr-5 text-sm font-medium">معلومات عامة</a>
             </div>
           </div>
         </div>
@@ -52,7 +53,7 @@ function TopBar() {
           <div>
             <button type="button" className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
               <span className="sr-only">Open user menu</span>
-              <img onClick={() => setOpen(!open)} className="h-8 w-8 rounded-full " src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+              <Avatar size='40px' name="Foo Bar" color='green' onClick={() => setOpen(!open)} className="h-1 w-1 rounded-full " />
             </button>
           </div>
 
