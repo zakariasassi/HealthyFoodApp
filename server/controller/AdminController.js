@@ -5,9 +5,10 @@ const Admins = require('../model/Admins')
 
 
 exports.createnewadmin  = async (req , res ) => {
-    const {username , password  , fullname , email } = req.body  
 
-    if ( !username || !password , !fullname || !email ) {
+    const {username , password  , fullname , email , phone } = req.body  
+
+    if ( !username || !password , !fullname || !email , !phone ) {
         res.json({
             message : 'الرجاء ادخال البيانات'
         })
@@ -16,7 +17,8 @@ exports.createnewadmin  = async (req , res ) => {
             username,
             password ,
             fullname,
-            email
+            email , 
+            phone
         }).then( resulte => {
             if(resulte) {
                 res.json({
@@ -53,6 +55,17 @@ exports.createnewadmin  = async (req , res ) => {
     }).then(( resulte ) => {
             console.log(resulte)
             if(resulte.password === password) {
+                Admins.update({
+                    last_login : Date.now()
+                },
+
+                {
+                    where : {
+                        id : resulte.id
+                    }
+                }
+                
+                )
                 res.json({
                     message : 'تمت مصادقة الحساب',
                     state : 1
@@ -74,4 +87,37 @@ exports.createnewadmin  = async (req , res ) => {
             
         }) 
     })
+ }
+
+
+
+
+ exports.getAlladmins = async (req, res) => {
+
+    try {
+        await Admins.findAll().then( data => {
+            res.status(200).json({
+                admins : data , 
+                state : 1 
+            })
+        })
+    } catch (error) {
+        console.log(error)
+    }
+ }
+
+
+
+
+ exports.deleteadmin = async (req, res) => {
+    const {id} = req.params
+
+    await Admins.destroy({
+        where : {
+            id : id
+        }
+    }).then(() => {
+        res.status(200)
+    })
+
  }

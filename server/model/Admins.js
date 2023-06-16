@@ -22,6 +22,10 @@ const admin = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    phone : {
+      type : DataTypes.INTEGER,
+      allowNull: false,
+    },
     fullname: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -40,11 +44,17 @@ const admin = db.define(
       type: DataTypes.DATEONLY,
       allowNull: true,
     },
+    createdAt : {
+      type: DataTypes.DATEONLY
+    },
+    updatedAt : {
+      type: DataTypes.DATEONLY
+    }
   },
   {
     freezeTableName: true,
     tableName: "admins",
-    timestamps: false,
+    timestamps: true,
   }
 );
 
