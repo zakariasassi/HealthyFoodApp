@@ -31,11 +31,11 @@ function TopBar() {
         <div className="hidden sm:mr-6 sm:block">
           <div className="flex space-x-4 mr-5">
       
-            <a href="#" className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium mr-5" aria-current="page">لوحة التحكم</a>
+            <a href="/home" className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium mr-5" aria-current="page">الرئيسية</a>
             <div className='flex space-x-4 mr-5'>
-            <a href="#" className="text-white hover:bg-green-700 hover:text-white rounded-md px-3 mr-5 py-2 text-sm font-medium">الاكلات</a>
-            <a href="#" className="text-white hover:bg-green-700 hover:text-white rounded-md px-3 py-2 mr-5  text-sm font-medium">التصنيفات</a>
-            <a href="#" className="text-white hover:bg-green-700 hover:text-white rounded-md px-3 py-2 mr-5 text-sm font-medium">معلومات عامة</a>
+            <a href="/meals" className="text-white hover:bg-green-700 hover:text-white rounded-md px-3 mr-5 py-2 text-sm font-medium">الاكلات</a>
+            <a href="/categorys" className="text-white hover:bg-green-700 hover:text-white rounded-md px-3 py-2 mr-5  text-sm font-medium">التصنيفات</a>
+            <a href="/info" className="text-white hover:bg-green-700 hover:text-white rounded-md px-3 py-2 mr-5 text-sm font-medium">معلومات عامة</a>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Categorys from "./pages/Categorys/Categorys";
 import Meals from "./pages/Meals/Meals";
-
+import Info from "./pages/Info/Info";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
           <Route path="/categorys"  element={<Categorys />}  />
           <Route path="/meals"  element={<Meals />}  />
           <Route path="/home"  element={<Home />}  />
+          <Route path="/info"  element={<Info />}  />
 
        </Routes>
       </BrowserRouter>

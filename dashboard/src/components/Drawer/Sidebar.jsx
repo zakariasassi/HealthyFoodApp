@@ -36,7 +36,9 @@ export default function Sidebar() {
 
         <MenuItem to="/allmeals" icon={<BsGrid3X3GapFill />} text="عرض كل الاكلات" />
         <MenuItem to="/addmeal" icon={<AiOutlinePlus />} text="اضافة اكلة" />
-        {/* <MenuItem to="/addinfo" icon={<AiOutlinePlus />} text="اضافة معلومة صحية" /> */}
+        <Divider className="bg-black" />
+        {/* <MenuItem to="/allinfo" icon={<BsGrid3X3GapFill />} text="عرض المعلومات" /> */}
+        <MenuItem to="/addinfo" icon={<AiOutlinePlus />} text="اضافة معلومة صحية" />
       </ul>
     </Box>
   );

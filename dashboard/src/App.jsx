@@ -10,6 +10,7 @@ import AddMeal from './pages/AddMeal/AddMeal';
 import AddInfo from './pages/AddInfo/AddInfo';
 import './App.css'
 import Meals from './pages/Meals/Meals';
+import AllInfo from './pages/allinfo/AllInfo';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path='/categorys' element={<Layout page={ < Categorys/> } />} />
           <Route path='/addmeal' element={<Layout page={ < AddMeal/> } />} />
           <Route path='/addinfo' element={<Layout page={ < AddInfo/> } />} />
+          <Route path='/allinfo' element={<Layout page={ < AllInfo/> } />} />
 
         </Routes>
     </BrowserRouter> 

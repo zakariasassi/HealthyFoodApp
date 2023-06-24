@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { imageserver } from "../../constent/url";
+import { imageserver, url } from "../../constent/url";
+
+import {  Toaster, toast } from "react-hot-toast";
 
 function Meals() {
   const [foodData, setFoodData] = useState([]);
 
-  useEffect(() => {
     // Fetch food items from the server
     const fetchFoodItems = async () => {
       try {
@@ -17,11 +18,26 @@ function Meals() {
       }
     };
 
+
+  const deletemeale = async (id) => {
+    await axios.delete( url +  `/deleteFoodItem/${id}`).then((res) => {
+
+        toast.success(res.data.msg)
+        fetchFoodItems();
+
+    })
+  }
+
+  useEffect(() => {
+
+    console.log(foodData)
+
     fetchFoodItems();
   }, []);
 
   return (
     <>
+    <Toaster/>
       <div className="w-full p-4" dir="rtl">
         <h1 className="text-2xl font-bold mb-4">Food List</h1>
         <table className="w-full border">
@@ -50,7 +66,7 @@ function Meals() {
                   />
                 </td>
                 <td style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                  <button type="button" className="btn btn-outline-danger btn-circle btn-lg btn-circle m-2">
+                  <button  onClick={() => deletemeale(food.id)} type="button" className="btn btn-outline-danger btn-circle btn-lg btn-circle m-2">
                     <i className="fa-sharp fa-solid fa-trash"></i>
                   </button>
                   <button type="button" className="btn btn-outline-warning btn-circle btn-lg btn-circle m-2">

@@ -19,6 +19,17 @@ exports.createFoodItem =  async function (req, res) {
   };
   
 
+
+  exports.getmealsbycategory = async (req , res) => {
+    await FoodItem.findAll({
+      where : {
+        category : req.params.name
+      }
+    }).then((resulte) => {
+      res.status(200).json({meals:resulte})
+    }).catch(err => res.status(501).json({msg : 'مشكلة في الخادم'}))
+  }
+
 // Retrieve all food items
 exports.getAllFoodItems = async function (req, res) {
   try {
@@ -30,6 +41,25 @@ exports.getAllFoodItems = async function (req, res) {
     res.status(500).json({ error: 'An error occurred while retrieving food items' });
   }
 };
+
+
+
+// Retrieve last 10 food items
+exports.getAllLastFoodItems = async function (req, res) {
+  try {
+    const foodItems = await FoodItem.findAll(
+      {
+        offset:10,
+      }
+      );
+    console.log('Food items:', foodItems);
+    res.status(200).json(foodItems);
+  } catch (error) {
+    console.error('Error retrieving food items:', error);
+    res.status(500).json({ error: 'An error occurred while retrieving food items' });
+  }
+};
+
 
 // Retrieve a specific food item by ID
 exports.getFoodItemById = async function (req, res) {
@@ -80,16 +110,18 @@ exports.deleteFoodItem = async function (req, res) {
     const { id } = req.params;
     const foodItem = await FoodItem.findByPk(id);
     if (foodItem) {
-      await foodItem.destroy();
-      console.log('Food item deleted');
-      res.status(204).end();
+      await foodItem.destroy().then(() => {
+        console.log('Food item deleted');
+        res.status(200).json({msg:'تم حذف الاكلة'});
+      })
+    
     } else {
       console.log('Food item not found');
-      res.status(404).json({ error: 'Food item not found' });
+      res.status(404).json({ msg: 'Food item not found' });
     }
   } catch (error) {
     console.error('Error deleting food item:', error);
-    res.status(500).json({ error: 'An error occurred while deleting the food item' });
+    res.status(500).json({ msg: 'مشكلة في الخادم' });
   }
 };
 

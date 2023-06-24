@@ -7,7 +7,7 @@ const Admins = require('../controller/AdminController')
 const Categorys = require('../controller/CategorysController')
 const Meals = require('../controller/MealsController')
 const UserController = require('../controller/UsersController')
-
+const InfoController = require('../controller/InfoController')
 
 
 
@@ -71,11 +71,11 @@ router.post('/createFoodItem' , upload.single('image') , Meals.createFoodItem)
 router.get('/getAllFoodItems' , Meals.getAllFoodItems)
 router.put('/updateFoodItem/:id' , Meals.updateFoodItem)
 router.delete('/deleteFoodItem/:id' , Meals.deleteFoodItem)
+router.get('/getmealsbycategory/:name' , Meals.getmealsbycategory)
 
 
 
-
-
+router.post('/addnewinfo'  , InfoController.addnewinfo)
 
 
 // Create a new user
