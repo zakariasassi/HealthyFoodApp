@@ -29,7 +29,6 @@ function App() {
           <Route path='/addmeal' element={<Layout page={ < AddMeal/> } />} />
           <Route path='/addinfo' element={<Layout page={ < AddInfo/> } />} />
           <Route path='/allinfo' element={<Layout page={ < AllInfo/> } />} />
-
         </Routes>
     </BrowserRouter> 
 

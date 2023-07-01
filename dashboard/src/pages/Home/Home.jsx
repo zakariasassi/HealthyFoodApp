@@ -1,12 +1,66 @@
+import { useEffect, useState } from "react";
 import { FaUsers, FaUser } from "react-icons/fa";
+import axios from 'axios'
+import { url } from '../../constent/url';
+
 
 function Home() {
 
-  const users = [
-    { id: 1, name: "John Doe", email: "john@example.com" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com" },
-    // Add more user data here
-  ];
+  const [lastusers , setLastUsers] = useState([])
+
+  const [userscounr , setuserCount] = useState(0)
+  const [mealscount , setmealsCount] = useState(0)
+  const [categoryscount , setcategoryscount] = useState(0)
+  const [infocount , setinfocount] = useState(0)
+
+
+
+  const getlastusers = async () => {
+    await axios.get(url + '/getLastUsers').then(res => {
+
+      setLastUsers(res.data.data)
+      console.log(res.data.data)
+      
+    }).catch( err => {
+      console.log(err)
+    })
+  }
+  async function getcounts() {
+    try {
+      const response1 = await axios.get(url + '/getuserscounts');
+      console.log('Data from endpoint 1:', response1.data);
+      setuserCount(response1.data.count)
+      const response2 = await axios.get(url + '/getmealscount');
+      console.log('Data from endpoint 2:', response2.data);
+      setmealsCount(response2.data.count)
+
+
+      const response3 = await axios.get(url + '/getcategorycounr');
+      console.log('Data from endpoint 3:', response3.data);
+  
+      setcategoryscount(response3.data.count)
+
+      const response4 = await axios.get(url + '/getinfocount');
+      console.log('Data from endpoint 4:', response4.data);
+      setinfocount(response4.data.count)
+
+      // Add more requests as needed...
+  
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+      useEffect(() => {
+        getlastusers()
+        getcounts()
+      },[])
+
+
+
+
+
+
   return (
     <>
             <div className="p-8 w-full" dir='rtl'>
@@ -16,30 +70,30 @@ function Home() {
         <div className="bg-green-500 text-white p-4 rounded-lg shadow-md">
           <div className="flex items-center mb-2">
             <FaUsers className="ml-2" />
-            <h3 className="font-bold text-lg">اخر 10 مسخدمين</h3>
+            <h3 className="font-bold text-lg">عدد  مسخدمين</h3>
           </div>
-          <p className="text-3xl font-bold">{users.length}</p>
+          <p className="text-3xl font-bold">{userscounr}</p>
         </div>
         <div className="bg-yellow-500 text-white p-4 rounded-lg shadow-md">
           <div className="flex items-center mb-2">
             <FaUsers className="ml-2" />
-            <h3 className="font-bold text-lg">Total Users</h3>
+            <h3 className="font-bold text-lg">عدد الاكلات</h3>
           </div>
-          <p className="text-3xl font-bold">{users.length}</p>
+          <p className="text-3xl font-bold">{mealscount}</p>
         </div>
         <div className="bg-red-500 text-white p-4 rounded-lg shadow-md">
           <div className="flex items-center mb-2">
             <FaUsers className="ml-2" />
-            <h3 className="font-bold text-lg">Total Users</h3>
+            <h3 className="font-bold text-lg">عدد التصنيفات</h3>
           </div>
-          <p className="text-3xl font-bold">{users.length}</p>
+          <p className="text-3xl font-bold">{categoryscount}</p>
         </div>
         <div className="bg-blue-500 text-white p-4 rounded-lg shadow-md">
           <div className="flex items-center mb-2">
             <FaUsers className="ml-2" />
-            <h3 className="font-bold text-lg">Total Users</h3>
+            <h3 className="font-bold text-lg">معلومة صحية</h3>
           </div>
-          <p className="text-3xl font-bold">{users.length}</p>
+          <p className="text-3xl font-bold">{infocount}</p>
         </div>
         {/* Add more cards here */}
       </div>
@@ -57,12 +111,12 @@ function Home() {
           </tr>
         </thead>
         <tbody>
-          {users.slice(0, 10).map(user => (
+          {lastusers.map(user => (
             <tr key={user.id}>
               <td className="py-2 px-4">{user.id}</td>
-              <td className="py-2 px-4">{user.name}</td>
+              <td className="py-2 px-4">{user.username}</td>
               <td className="py-2 px-4">{user.email}</td>
-              <td>3-3-2020</td>
+              <td>{user.createdAt}</td>
             </tr>
           ))}
         </tbody>

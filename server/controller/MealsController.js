@@ -126,3 +126,20 @@ exports.deleteFoodItem = async function (req, res) {
 };
 
 
+
+exports.getLastFoodIteam = async (req , res ) => {
+
+
+  await FoodItem.findAll({
+    order: [['id', 'DESC']], // Order by the 'id' column in descending order
+    limit: 5, // Limit the result to the last 10 rows
+
+  }).then( resulte => {
+    res.json({
+      data : resulte,
+      state : 1
+    })
+  }).catch( err => {
+    console.log(err)
+  })
+}

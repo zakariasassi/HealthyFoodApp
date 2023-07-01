@@ -29,7 +29,7 @@ function ManageUsers() {
                 <th scope="col" style={{ textAlign: 'center' }}>البريد الالكتروني</th>
                 <th scope="col" style={{ textAlign: 'center' }}>اخر دخول</th>
                 <th scope="col" style={{ textAlign: 'center' }}> الاسم كامل</th>
-                <th scope="col" style={{ textAlign: 'center' }}>عمليات</th>
+                {/* <th scope="col" style={{ textAlign: 'center' }}>عمليات</th> */}
               </tr>
             </thead>
             <tbody>
@@ -40,7 +40,7 @@ function ManageUsers() {
                   <td style={{ textAlign: 'center' }}>{user.email}</td>
                   <td style={{ textAlign: 'center' }}>{user.last_login}</td>
                   <td style={{ textAlign: 'center' }}>{user.fullname}</td>
-                  <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  {/* <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <button type="button" className="btn btn-outline-danger btn-circle btn-lg btn-circle m-2">
                       <i className="fa-sharp fa-solid fa-trash"></i>
                     </button>
@@ -50,7 +50,7 @@ function ManageUsers() {
                     <button type="button" className="btn btn-outline-warning btn-circle btn-lg btn-circle m-2">
                       <i className="fa-solid fa-pen-to-square"></i>
                     </button>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>

@@ -2,12 +2,18 @@ import React, { useEffect , useState } from "react";
 import TopBar from "../../components/TopBar/TopBar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { url } from "../../../../dashboard/src/constent/url";
+import { imageserver, url } from "../../../../dashboard/src/constent/url";
+
+
+
 function Home() {
+
+
   const navigate = useNavigate();
   const [categorys , setCategorys] = useState([])
   const colors = ['yellow' , 'green' , 'red' , 'orange' , 'pink' ,'purple' , 'blue' ]
 
+  const [meals, setMeals] = useState([]);
 
 
   const getallcategorys = async () => {
@@ -22,9 +28,20 @@ function Home() {
     navigate("/meals");
   };
 
+    const getlastmesals = async () => {
+    axios.get( url +  '/getLastFoodIteam')
+    .then(response => {
+      setMeals(response.data.data);
+    })
+    .catch(error => {
+      console.error('Error retrieving meals:', error);
+    });
+    }
 
   useEffect(() => {
-    getallcategorys()
+    getlastmesals()
+
+    // getallcategorys()
   },[])
 
   return (
@@ -48,7 +65,7 @@ function Home() {
             تصفح الاكلات
           </button>
         </div>
-
+{/* 
         <h2 className="text-3xl font-bold text-green-800 text-center mt-10 ">
           استعمل التصنيفات للوصول للوجبات بسرعة
         </h2>
@@ -70,28 +87,45 @@ function Home() {
                 })
               }
           </div>
-        </div>
+        </div> */}
             <div className="flex flex-row flex-wrap  pt-20 pb-20" dir="rtl">
             <div className="w-full">
             <h2 className="text-3xl font-bold text-green-800 text-right mt-10 ">
             المضافة حديثا
         </h2>
             </div>
-        <div className="w-44 h-80 rounded overflow-hidden shadow-lg mt-8">
-          <img
-            className="w-full"
-            src="https://res.cloudinary.com/daily-now/image/upload/f_auto,q_auto/v1/posts/590ffd4ebcc5d9e3db74ac7952fc38f0"
-            alt="Food Ads"
-          />
-          <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">Last Food Ads</div>
-            <p className="text-gray-700 text-base">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              euismod, diam eget varius fringilla, velit mauris bibendum turpis,
-              vel bibendum sapien magna vel sapien.{" "}
-            </p>
-          </div>
+            <div className="w-full">
+        <div className="flex flex-wrap grid grid-cols-3 justify-between w-full">
+          {meals.map((meal, index) => (
+            
+            <div key={index} className="w-64 p-2 m-10 bg-white shadow-lg rounded-2xl" dir='rtl'>
+              <img src={ imageserver +  meal.image} alt={meal.name} className="w-auto  p-4 m-auto h-auto" />
+              <div className="p-4 m-3 bg-green-200 rounded-lg">
+
+              <p className="text-xl font-bold text-black">اسم الاكلة</p>
+                <p className="text-xl font-bold text-black">{meal.name}</p>
+
+
+                <p className="text-xl font-bold text-black"> مكونات الوصفة</p>
+                <p className="text-xs text-black">{meal.ingredients}</p>
+
+                <p className="text-xl font-bold text-black"> السعرات </p>
+                <p className="text-xl font-bold text-black">{meal.calories}</p>
+
+                
+                <p className="text-xl font-bold text-black"> التصنيف </p> 
+                  <p className="text-black">{meal.category}</p>
+                <div className="flex items-center justify-between">
+
+
+              
+        
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
+      </div>
             </div>
       </div>
     </>

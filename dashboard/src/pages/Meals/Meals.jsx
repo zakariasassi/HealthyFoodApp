@@ -69,9 +69,9 @@ function Meals() {
                   <button  onClick={() => deletemeale(food.id)} type="button" className="btn btn-outline-danger btn-circle btn-lg btn-circle m-2">
                     <i className="fa-sharp fa-solid fa-trash"></i>
                   </button>
-                  <button type="button" className="btn btn-outline-warning btn-circle btn-lg btn-circle m-2">
+                  {/* <button type="button" className="btn btn-outline-warning btn-circle btn-lg btn-circle m-2">
                     <i className="fa-solid fa-pen-to-square"></i>
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             ))}

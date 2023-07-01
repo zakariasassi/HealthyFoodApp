@@ -124,3 +124,24 @@ exports.forgotPassword = async (req, res) => {
     res.status(500).json({ error: 'An error occurred while processing forgot password' });
   }
 };
+
+
+
+
+exports.getLastUsers = async (req , res ) => {
+
+
+  await User.findAll({
+    order: [['id', 'DESC']], // Order by the 'id' column in descending order
+    limit: 10, // Limit the result to the last 10 rows
+
+  }).then( resulte => {
+    console.log(resulte)
+    res.json({
+      data : resulte,
+      state : 1
+    })
+  }).catch( err => {
+    console.log(err)
+  })
+}

@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { url } from '../../../../dashboard/src/constent/url';
+import toast, { Toaster } from 'react-hot-toast';
+
+
 
 function Signup() {
+
+  const notify = (msg) => toast(msg);
+
   const [username, setUsername] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -12,26 +18,35 @@ function Signup() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // Create a new user object with the form data
-    const newUser = {
-      username,
-      fullname: name,
-      email,
-      password
-    };
 
-    // Send a POST request to the signup endpoint with the user data using axios
-    axios.post(url + '/signup', newUser)
-      .then(response => {
-        // Handle the response from the server
-        console.log(response.data); // You can customize this based on your application's needs
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    if(username === "" || password === "" || email === "" || name === "") {
+      notify("الرجاء تعبئة كل الحقول")
+    }else{
+      const newUser = {
+        username,
+        fullname: name,
+        email,
+        password
+      };
+  
+      // Send a POST request to the signup endpoint with the user data using axios
+      axios.post(url + '/signup', newUser)
+        .then(response => {
+          // Handle the response from the server
+          console.log(response.data); // You can customize this based on your application's needs
+          notify("تم تسجيلك بنجاح")
+
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
   };
 
   return (
     <>
+    <Toaster position='bottom-left'  />
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-400 to-green-950" dir='rtl' >
         <div className="w-2/5 bg-white rounded-lg shadow-md p-6">
           <form onSubmit={handleFormSubmit}>

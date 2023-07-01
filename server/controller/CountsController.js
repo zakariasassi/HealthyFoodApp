@@ -10,21 +10,34 @@ const Categorys = require('../model/Categorys')
 
 
 exports.getuserscount = async (req , res ) => {
-    res.status(200)
+    await Users.findAndCountAll().then(resulte => {
+        res.json({count : resulte.count})
+    }).catch( err => {
+        console.log(err)
+    })
 }
 
 exports.categoryscount = async (req , res ) => {
-    res.status(200)
-
+    await Categorys.findAndCountAll().then(resulte => {
+        res.json({count : resulte.count})
+    }).catch( err => {
+        console.log(err)
+    })
 }
 
 exports.mealscount = async (req , res ) => {
-    res.status(200)
-
+    await Meals.findAndCountAll().then(resulte => {
+        res.json({count : resulte.count})
+    }).catch( err => {
+        console.log(err)
+    })
 }
 
 
 exports.countinfiramtions = async (req , res ) => {
-    res.status(200)
-
+    await Info.findAndCountAll().then(resulte => {
+        res.json({count : resulte.count})
+    }).catch( err => {
+        console.log(err)
+    })
 }

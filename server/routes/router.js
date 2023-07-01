@@ -8,7 +8,7 @@ const Categorys = require('../controller/CategorysController')
 const Meals = require('../controller/MealsController')
 const UserController = require('../controller/UsersController')
 const InfoController = require('../controller/InfoController')
-
+const Counts = require('../controller/CountsController')
 
 
 const crypto = require('crypto');
@@ -52,6 +52,7 @@ router.post('/addadmin' ,  Admins.createnewadmin)
 router.post('/loginadmin' ,  Admins.loginadmin)
 router.get('/getAlladmins' ,  Admins.getAlladmins)
 router.delete('/deleteadmin/:id' , Admins.deleteadmin)
+router.post('/updateadmin' , Admins.updateadmin)
 
 
 
@@ -67,40 +68,38 @@ router.delete('/deleteCategory/:id' , Categorys.deleteCategory)
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 
-router.post('/createFoodItem' , upload.single('image') , Meals.createFoodItem)
+router.post('/createFoodItem'  , upload.single('image') , Meals.createFoodItem)
 router.get('/getAllFoodItems' , Meals.getAllFoodItems)
 router.put('/updateFoodItem/:id' , Meals.updateFoodItem)
 router.delete('/deleteFoodItem/:id' , Meals.deleteFoodItem)
 router.get('/getmealsbycategory/:name' , Meals.getmealsbycategory)
-
-
+router.get('/getLastFoodIteam'  , Meals.getLastFoodIteam)
 
 router.post('/addnewinfo'  , InfoController.addnewinfo)
+router.get('/getallinfo'  ,  InfoController.getallinfo)
 
 
-// Create a new user
 router.post('/users', UserController.createUser);
-
-// Get all users
 router.get('/users', UserController.getAllUsers);
-
-// Get a user by ID
 router.get('/users/:id', UserController.getUserById);
-
-// Update a user
 router.put('/users/:id', UserController.updateUser);
-
-// Delete a user
 router.delete('/users/:id', UserController.deleteUser);
-
-// User login
 router.post('/login', UserController.login);
-
-// User signup
 router.post('/signup', UserController.signup);
-
-// Forgot password
 router.post('/forgot-password', UserController.forgotPassword);
+router.get('/getLastUsers' , UserController.getLastUsers)
+
+
+
+
+
+
+
+router.get("/getuserscounts" , Counts.getuserscount )
+router.get("/getmealscount" , Counts.mealscount )
+router.get("/getcategorycounr" , Counts.categoryscount )
+router.get("/getinfocount" , Counts.countinfiramtions )
+
 
 
 

@@ -1,9 +1,6 @@
 const Admins = require('../model/Admins')
 
 
-
-
-
 exports.createnewadmin  = async (req , res ) => {
 
     const {username , password  , fullname , email , phone } = req.body  
@@ -66,6 +63,8 @@ exports.createnewadmin  = async (req , res ) => {
                 }
                 
                 )
+
+
                 res.json({
                     message : 'تمت مصادقة الحساب',
                     state : 1
@@ -119,5 +118,52 @@ exports.createnewadmin  = async (req , res ) => {
     }).then(() => {
         res.status(200)
     })
+
+ }
+
+
+
+ exports.updateadmin = async  ( req , res ) => {
+    const {username , password  , fullname , email , phone , id } = req.body  
+
+    if ( !username || !password , !fullname || !email , !phone ) {
+        res.json({
+            message : 'الرجاء ادخال البيانات'
+        })
+    }else{
+        await Admins.update({
+            username,
+            password ,
+            fullname,
+            email , 
+            phone
+        },
+        {
+            where : {
+                id : id
+            }
+        }).then( resulte => {
+            if(resulte) {
+                res.json({
+                    message : 'تم تحديث حساب المستخدم ',
+                    state : 1
+                    
+                })
+            }else{
+                res.json({
+                    message : '  فشل تحديث حساب المستخدم ',
+                    state : 0
+                    
+                })   
+            }
+        }).catch(err => {
+            console.log(err)
+            res.json({
+                message : '  فشل تحديث حساب المستخدم ',
+                state : 0
+                
+            })   
+        })
+    }
 
  }
